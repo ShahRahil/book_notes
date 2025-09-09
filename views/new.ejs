@@ -1,0 +1,34 @@
+<%- include('partials/header.ejs'); -%>
+<div class="container">
+    <form action="/new" method="post">
+  <div class="mb-3">
+    <label for="title" class="form-label">Book Title</label>
+    <input type="text" class="form-control" id="title" name="title" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="isbn" class="form-label">ISBN</label>
+    <input type="text" class="form-control" id="isbn" name="isbn" required>
+    <div id="isbnHelp" class="form-text">ISBN code is required to uniquely identify a book.</div>
+  </div>
+
+  <div class="mb-3">
+    <label for="rating">How much did you like reading this book? (0 to 10) </label>
+    <input type="range" class="custom-range" min="0" max="10" id="rating" name="rating" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="summary" class="form-label">Write your Summary</label>
+    <textarea class="form-control" id="summary" name="summary" rows="7" required></textarea>
+  </div> 
+
+  <div class="mb-3">
+    <label for="dob">When did you read:</label>
+    <input type="date" id="dob" name="dateread">
+  </div>
+
+  <button type="submit" class="btn btn-dark">Add</button>
+</form>
+
+</div>
+<%- include('partials/footer.ejs'); -%>

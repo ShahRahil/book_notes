@@ -1,0 +1,39 @@
+<%- include('partials/header.ejs'); -%>
+
+<% post.forEach((p)=>{ %>
+
+<div class="container col-xxl-8 px-4 py-5"> 
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5"> 
+        <div class="col-10 col-sm-8 col-lg-6"> 
+            <a href="/edit/<%= p.id %>" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Edit</a>
+            <a href="/delete/<%= p.id %>" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Delete</a>
+            <br>
+            <img src="<%= api_url + p.isbn + end_url %>" 
+            class="d-block mx-lg-auto img-fluid" 
+            alt="Hero image displaying a Book Shelf" 
+            height="500">
+            
+        </div> 
+        
+        <div class="col-lg-6"> 
+            <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3"><%= p.title %></h1> 
+            <p>
+                Voted: <%= "⭐".repeat(p.rating) %>/10
+            </p>
+            <p>
+                <b>Posted on: </b> <%= p.date_read %>
+            </p>
+            <p>
+                ISBN Code: <i><%= p.isbn %></i>
+            </p>
+            <p class="lead"><%= p.summary %>
+            </p> 
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start"> 
+                <a type="button" class="btn btn-dark btn-lg px-4 me-md-2" href="/reviews">Back to Reviews</a> 
+                <a type="button" class="btn btn-outline-secondary btn-lg px-4" href="/add">Add a Review</a> 
+            </div> 
+        </div> 
+    </div> 
+</div>
+<% }) %>
+<%- include('partials/footer.ejs'); -%>

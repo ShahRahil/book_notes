@@ -1,0 +1,65 @@
+<%- include('partials/header.ejs'); -%>
+<div class="container px-4 py-5" id="custom-cards"> 
+    <h2 class="pb-2 border-bottom">Reviews</h2> 
+    <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <%= field %>
+  </button>
+<form id="sortForm" action="/sort" method="get">
+  <!-- Hidden input to store the sort field -->
+  <input type="hidden" name="field" id="sortField" value="<%= field %>">
+
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="#" data-field="id">Addtime</a></li>
+    <li><a class="dropdown-item" href="#" data-field="rating">Ratings</a></li>
+    <li><a class="dropdown-item" href="#" data-field="date_read">Date Read</a></li>
+  </ul>
+</form>
+
+</div>
+    <!--Alert content -->
+           <% if (locals.alertmessage){ %>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <%= alertmessage %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <% } %>
+
+    <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5"> 
+        
+        <% if (locals.books) { %>
+        <% books.forEach((book)=>{ %>
+        
+        <div class="col"> 
+            
+
+            <!--Other content-->
+            <a href="/reviews/<%= book.id %>" class="text-decoration-none">
+            <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('<%= api_url + book.isbn + end_url %>');">
+                <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1"> 
+                    <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold"><%= book.title %></h3> 
+                    <ul class="d-flex list-unstyled mt-auto"> 
+                        <li class="me-auto"> <!--ISBN-->
+                            <p width="32" height="32"> ISBN: <%= book.isbn %> </p>
+                        </li> 
+                        <li class="d-flex align-items-center"> <!--Date-->
+                            <p width="32" height="32"><%= book.date_read.toISOString().split("T")[0] %> </p> 
+                        </li> 
+                        <li class="d-flex align-items-center me-3"> <!--Ratings -->
+                            <svg class="bi me-2" width="1em" height="1em" role="img" aria-label="Location"><use xlink:href="#geo-fill"></use></svg> 
+                            <small><%= book.rating %></small> 
+                        </li>
+                    </ul> 
+                </div> 
+            </div> 
+            </a>
+        </div> 
+        
+        <% }) %>
+        <% } else { %>
+            <h1>No books have been added yet. You can add a new book using the button below.</h1>
+            <a type="button" class="btn btn-outline-secondary btn-lg px-4" href="/add">Add a Review</a> 
+        <% } %>
+    </div>
+</div>
+<%- include('partials/footer.ejs'); -%>
