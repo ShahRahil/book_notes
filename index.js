@@ -13,7 +13,7 @@ let sortby = "id"
 //Database Connection
 const db = new pg.Client({
     user: "postgres",
-    password: "R@#!l.1705",
+    password: "",
     host: "localhost",
     port: 5432,
     database: "books"
