@@ -13,7 +13,7 @@ let sortby = "id"
 //Database Connection
 const db = new pg.Client({
     user: "postgres",
-    password: "",
+    password: "R@#!l.1705",
     host: "localhost",
     port: 5432,
     database: "books"
@@ -58,7 +58,8 @@ app.get("/reviews", async (req,res)=>{
     res.render("reviews.ejs",{
         books: data,
         api_url: image_api_url,
-        end_url: image_api_url_end
+        end_url: image_api_url_end,
+        field: "Addtime"
     });
 });
 
@@ -150,6 +151,14 @@ app.get("/delete/:id", async (req,res)=>{
         alertmessage: "Book Deleted successfully"
     });
 });
+
+app.get("/404", (req,res)=>{
+    res.render("notfound.ejs");
+})
+
+app.get(/(.*)/, (req,res)=>{
+    res.redirect("/404");
+})
 
 //Run app
 app.listen(port, ()=>{
